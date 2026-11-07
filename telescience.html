@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>چرا افراد فوق‌العاده باهوش معمولا کارها را تا لحظهٔ آخر به تعویق می‌اندازند؟</title>
+<meta name="description" content="بررسی علمی تعلل فعال، شبکهٔ حالت پیش‌فرض مغز و قانون یورکز–دادسون — همراه با روایت صوتی و متن همگام.">
+<meta name="theme-color" content="#17212b">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#17212b;
+    --bg-deep:#101921;
+    --card:#232e3c;
+    --line:#0e1621;
+    --line-soft:#2b3846;
+    --txt:#ffffff;
+    --dim:#708499;
+    --acc:#5288c1;
+    --acc-hi:#64b5ef;
+    --title:#64b5ef;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--txt);
+    font-family:"Vazirmatn","IRANSans",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+    line-height:2.05;
+    overflow-x:hidden;
+    padding-bottom:92px;
+  }
+  a{color:var(--acc-hi);text-decoration:none}
+
+  /* ================= کاور ================= */
+  .hero{background:var(--bg-deep)}
+  .hero img{width:100%; display:block; max-height:58vh; object-fit:cover}
+
+  /* ================= مقاله ================= */
+  article{max-width:720px; margin:0 auto; padding:24px 18px 0}
+
+  h1{
+    font-size:24px; line-height:1.65; font-weight:800;
+    margin:0 0 10px;
+    color:var(--title);
+  }
+
+  .meta{
+    font-size:12.5px; color:var(--dim);
+    padding-bottom:16px; margin-bottom:24px;
+    border-bottom:1px solid var(--line-soft);
+  }
+
+  .typed p{
+    margin:0 0 22px;
+    font-size:17px;
+    line-height:2.15;
+    color:#e0e8f0;
+  }
+  .typed p:first-child{
+    font-size:18.5px;
+    font-weight:600;
+    color:#fff;
+  }
+  .typed p.is-empty{display:none}
+
+  .typed p.is-typing::after{
+    content:"";
+    display:inline-block;
+    width:2px;
+    height:1.05em;
+    margin-inline-start:3px;
+    vertical-align:-.18em;
+    border-radius:1px;
+    background:var(--acc-hi);
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  /* ================= امضا / فوتر ================= */
+  .sig-brand-row{
+    margin-top:40px;
+    padding-bottom:14px;
+    text-align:left;
+    font-size:14px;
+    font-weight:800;
+    color:#fff;
+    letter-spacing:.5px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .sig-footer{
+    padding:16px 0 14px;
+    text-align:center;
+    font-size:13px;
+    color:var(--dim);
+  }
+  .sig-footer a{
+    color:var(--acc-hi);
+    font-weight:600;
+  }
+
+  /* ================= پنل شروع ================= */
+  .gate{
+    position:fixed; inset:0; z-index:60;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:18px; padding:28px; text-align:center;
+    background:var(--bg);
+    transition:opacity .45s ease, visibility .45s;
+  }
+  .gate.is-hidden{opacity:0; visibility:hidden; pointer-events:none}
+
+  .gate-play{
+    width:88px; height:88px; border:0; border-radius:50%;
+    display:grid; place-items:center; cursor:pointer;
+    color:#fff;
+    background:var(--acc);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .gate-play:active{transform:scale(.95); background:var(--acc-hi)}
+
+  .gate small{font-size:11px; color:var(--dim); letter-spacing:.5px}
+
+  /* ================= پلیر ================= */
+  .player{
+    position:fixed; inset-inline:0; bottom:0; z-index:40;
+    display:none; align-items:center; gap:12px;
+    padding:10px 14px;
+    padding-bottom:calc(10px + env(safe-area-inset-bottom));
+    background:var(--bg-deep);
+    border-top:1px solid var(--line);
+  }
+  .player.is-visible{display:flex}
+
+  .pbtn{
+    flex:none; width:44px; height:44px; border:0; border-radius:50%;
+    display:grid; place-items:center; cursor:pointer;
+    color:#fff; background:var(--acc);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .pbtn.ghost{
+    width:36px; height:36px; background:none; color:var(--dim); font-size:16px;
+  }
+  .pbtn:active{transform:scale(.94)}
+
+  .track{
+    position:relative; flex:1; height:6px; border-radius:4px;
+    background:#2b3846; cursor:pointer; overflow:hidden;
+    touch-action:none;
+  }
+  .track:focus-visible{outline:2px solid var(--acc-hi); outline-offset:4px}
+  .fill{
+    height:100%; width:0; border-radius:4px;
+    background:var(--acc-hi);
+  }
+
+  .ptime{
+    flex:none; font-size:11.5px; color:var(--dim);
+    font-variant-numeric:tabular-nums;
+    min-width:74px; text-align:center;
+  }
+
+  @media (max-width:380px){
+    .ptime{min-width:62px; font-size:10.5px}
+    h1{font-size:22px}
+    .typed p{font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <button class="gate-play" id="startBtn" aria-label="پخش روایت صوتی">
+    <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" style="transform:translateX(2px)">
+      <path d="M8 5v14l11-7z" fill="currentColor"/>
+    </svg>
+  </button>
+  <small>®️ SHΞN™ᴢᴇʀᴏ</small>
+</div>
+
+<div class="player" id="player">
+  <button class="pbtn" id="playBtn" aria-label="پخش / توقف">
+    <svg id="playIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d="M8 5v14l11-7z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <div class="track" id="track" role="slider" tabindex="0"
+       aria-label="پیشرفت پخش" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="fill" id="fill"></div>
+  </div>
+
+  <span class="ptime" id="time">0:00 / 0:00</span>
+  <button class="pbtn ghost" id="muteBtn" aria-label="قطع صدا">🔊</button>
+</div>
+
+<div class="hero">
+  <img src="https://raw.githubusercontent.com/aishervin/Ai/refs/heads/main/IMG_20261107_175931_624.jpg" alt="کاور مطلب">
+</div>
+
+<article>
+  <h1>چرا افراد فوق‌العاده باهوش معمولا کارها را تا لحظهٔ آخر به تعویق می‌اندازند؟</h1>
+
+  <div class="meta">نویسنده: SHΞN™ᴢᴇʀᴏ · روایت صوتی ۱ دقیقه</div>
+
+  <div class="typed" id="typed"></div>
+
+  <div class="sig-brand-row">SHΞN™ᴢᴇʀᴏ®️</div>
+
+  <div class="sig-footer">
+    <a href="https://t.me/shervini"> Exclusive ☬SHΞN™ made</a>
+  </div>
+</article>
+
+<audio id="audio" preload="auto" playsinline>
+  <source src="https://raw.githubusercontent.com/aishervin/Ai/refs/heads/main/%E2%98%AC%E2%84%A2%20(8).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- متن روایت
+     پاراگراف اول با hidden:true فقط برای هم‌زمانی با صدا حساب می‌شود
+     و در صفحه تایپ نمی‌شود (چون تیتر بالای صفحه ثابت و آبی است). ---------- */
+  var SCRIPT = [
+    { hidden: true, segs: [
+      'چرا افراد فوق‌العاده باهوش معمولاً کارها را تا لحظهٔ آخر به تعویق می‌اندازند؟'
+    ]},
+    { segs: [
+      'بر اساس تحقیقات مغز، این افراد از یک مکانیزم خاص پیروی می‌کنند.'
+    ]},
+    { segs: [
+      'آن‌ها از نظر ریاضی حساب می‌کنند که می‌توانند کارها را در کمترین زمان ممکن جمع کنند؛',
+      'برای همین سیستم عصبی‌شان زیر بار عجله کردن نمی‌رود.'
+    ]},
+    { segs: [
+      'اما بخش مهم ماجرا اینجاست:',
+      'وقتی آن‌ها ظاهراً وقت تلف می‌کنند، ناخودآگاهشان با تمام توان روی مسئله کار می‌کند.',
+      'در علوم اعصاب به این حالت «دورهٔ نهفتگی» می‌گویند.'
+    ]},
+    { segs: [
+      'وقتی از یک مسئلهٔ پیچیده فاصله می‌گیرید، مغز شما در پس‌زمینه شروع به شبیه‌سازی می‌کند',
+      'و اتصالات عصبی خلاقانه‌ای می‌سازد که با تلاش مستقیم هرگز به آن‌ها نمی‌رسید.'
+    ]},
+    { segs: [
+      'و درست وقتی ددلاین به نقطهٔ بحرانی می‌رسد، غریزهٔ بقا بیدار می‌شود:',
+      'ترشح ناگهانی آدرنالین، مغز را وارد حالت تمرکز فوق‌العاده شدید می‌کند',
+      'که طبق تحقیقات، خلاقیت را بالا می‌برد.'
+    ]},
+    { segs: [
+      'پس این آدم‌ها تنبل نیستند.',
+      'آن‌ها به ناخودآگاهشان زمان می‌دهند تا داده‌ها را پردازش و آماده کند،',
+      'و بعد از استرس دقیقهٔ نود به‌عنوان محرک اصلی تمرکز و عملکرد پیشرفته‌شان استفاده می‌کنند.'
+    ]},
+    { segs: [
+      'اینجا کنار هم در مسیر ذهن‌آگاهی حرکت می‌کنیم.',
+      'با ما همراه شو…'
+    ]}
+  ];
+
+  /* ---------- ساخت پاراگراف‌ها ---------- */
+  var host = document.getElementById('typed');
+  var paragraphs = [];
+  var offset = 0;
+
+  SCRIPT.forEach(function (item) {
+    var segs = item.segs;
+    var text = segs.join(' ');
+    var p = {
+      text: text,
+      start: offset,
+      segs: [],
+      el: null,
+      shown: -1,
+      hidden: !!item.hidden
+    };
+    var inner = 0;
+
+    segs.forEach(function (s) {
+      p.segs.push({ text: s, start: p.start + inner, len: s.length });
+      inner += s.length + 1;
+    });
+
+    offset += text.length + 2;
+    paragraphs.push(p);
+
+    if (!p.hidden) {
+      var el = document.createElement('p');
+      el.className = 'is-empty';
+      host.appendChild(el);
+      p.el = el;
+    }
+  });
+
+  /* ---------- زمان‌بندی ---------- */
+  var timeline = [];
+  var DURATION = 67;
+
+  function buildTimeline(duration) {
+    var weights = [];
+    var total = 0;
+
+    paragraphs.forEach(function (p) {
+      p.segs.forEach(function (s) {
+        var w = s.len + (/[.؟!…،؛:]$/.test(s.text) ? 9 : 3);
+        weights.push(w);
+        total += w;
+      });
+    });
+
+    timeline = [];
+    var acc = 0, i = 0;
+
+    paragraphs.forEach(function (p) {
+      p.segs.forEach(function (s) {
+        var start = (acc / total) * duration;
+        acc += weights[i++];
+        var end = (acc / total) * duration;
+        timeline.push({ start: start, end: end, from: s.start, len: s.len });
+      });
+    });
+  }
+
+  function visibleLength(t) {
+    var n = timeline.length;
+    if (!n || t <= 0) return 0;
+
+    var last = timeline[n - 1];
+    if (t >= last.end) return last.from + last.len;
+
+    var lo = 0, hi = n - 1;
+    while (lo < hi) {
+      var mid = (lo + hi) >> 1;
+      if (timeline[mid].end <= t) lo = mid + 1;
+      else hi = mid;
+    }
+
+    var seg = timeline[lo];
+    if (t <= seg.start) return seg.from;
+
+    var ratio = (t - seg.start) / (seg.end - seg.start);
+    return seg.from + Math.floor(ratio * seg.len);
+  }
+
+  /* ---------- رندر ---------- */
+  var lastActive = -1;
+
+  function render(t) {
+    var v = visibleLength(t);
+    var active = -1;
+
+    for (var i = 0; i < paragraphs.length; i++) {
+      var p = paragraphs[i];
+      if (!p.el) continue; /* پاراگرافِ مخفی (تیتر) فقط در زمان‌بندی حساب شده */
+
+      var local = Math.min(Math.max(v - p.start, 0), p.text.length);
+
+      if (local === 0) {
+        if (p.shown !== 0) {
+          p.el.textContent = '';
+          p.el.classList.add('is-empty');
+          p.shown = 0;
+        }
+        p.el.classList.remove('is-typing');
+        continue;
+      }
+
+      p.el.classList.remove('is-empty');
+
+      if (p.shown !== local) {
+        p.el.textContent = p.text.slice(0, local);
+        p.shown = local;
+      }
+
+      if (local < p.text.length) {
+        p.el.classList.add('is-typing');
+        active = i;
+      } else {
+        p.el.classList.remove('is-typing');
+      }
+    }
+
+    if (active !== lastActive) {
+      lastActive = active;
+      if (active >= 0 && paragraphs[active].el) reveal(paragraphs[active].el);
+    }
+  }
+
+  function reveal(el) {
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    if (r.bottom > vh - 140 || r.top < 80) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  /* ---------- عناصر ---------- */
+  var audio   = document.getElementById('audio');
+  var gate    = document.getElementById('gate');
+  var startBt = document.getElementById('startBtn');
+  var player  = document.getElementById('player');
+  var playBt  = document.getElementById('playBtn');
+  var playIcon= document.getElementById('playIcon');
+  var track   = document.getElementById('track');
+  var fill    = document.getElementById('fill');
+  var timeEl  = document.getElementById('time');
+  var muteBt  = document.getElementById('muteBtn');
+
+  var ICON_PLAY  = '<path d="M8 5v14l11-7z" fill="currentColor"/>';
+  var ICON_PAUSE = '<path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/>';
+  var ICON_REPLAY= '<path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" fill="currentColor"/>';
+
+  /* متن کمی جلوتر از صدا (۰.۹ ثانیه) */
+  var LEAD = 0.9;
+
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s || 0));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  function updateTime() {
+    var d = Number.isFinite(audio.duration) ? audio.duration : DURATION;
+    timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(d);
+    var pct = d ? (audio.currentTime / d) * 100 : 0;
+    fill.style.width = pct + '%';
+    track.setAttribute('aria-valuenow', Math.round(pct));
+  }
+
+  var rafId = null;
+
+  function loop() {
+    render(audio.currentTime + LEAD);
+    updateTime();
+    rafId = audio.paused ? null : requestAnimationFrame(loop);
+  }
+
+  function startLoop() {
+    if (rafId === null) rafId = requestAnimationFrame(loop);
+  }
+
+  function syncDuration() {
+    var d = audio.duration;
+    if (Number.isFinite(d) && d > 1) {
+      DURATION = d;
+      buildTimeline(d);
+      render(audio.currentTime + LEAD);
+      updateTime();
+    }
+  }
+
+  audio.addEventListener('loadedmetadata', syncDuration);
+  audio.addEventListener('durationchange', syncDuration);
+
+  function setIcon(icon) { playIcon.innerHTML = icon; }
+
+  function play() {
+    var p = audio.play();
+    if (p && p.catch) p.catch(function () { setIcon(ICON_PLAY); });
+  }
+
+  function toggle() {
+    if (audio.paused) {
+      if (audio.ended) audio.currentTime = 0;
+      play();
+    } else {
+      audio.pause();
+    }
+  }
+
+  audio.addEventListener('play', function () {
+    setIcon(ICON_PAUSE);
+    startLoop();
+  });
+
+  audio.addEventListener('pause', function () {
+    setIcon(ICON_PLAY);
+    render(audio.currentTime + LEAD);
+    updateTime();
+  });
+
+  audio.addEventListener('ended', function () {
+    setIcon(ICON_REPLAY);
+    render(audio.currentTime + LEAD);
+    updateTime();
+  });
+
+  audio.addEventListener('seeked', function () {
+    render(audio.currentTime + LEAD);
+    updateTime();
+  });
+
+  audio.addEventListener('error', function () {
+    buildTimeline(DURATION);
+    render(1e9);
+  });
+
+  playBt.addEventListener('click', toggle);
+
+  muteBt.addEventListener('click', function () {
+    audio.muted = !audio.muted;
+    muteBt.textContent = audio.muted ? '🔇' : '🔊';
+    muteBt.setAttribute('aria-label', audio.muted ? 'وصل صدا' : 'قطع صدا');
+  });
+
+  var dragging = false;
+
+  function seekTo(clientX) {
+    var r = track.getBoundingClientRect();
+    var ratio = (r.right - clientX) / r.width;
+    ratio = Math.min(Math.max(ratio, 0), 1);
+    if (Number.isFinite(audio.duration)) {
+      audio.currentTime = ratio * audio.duration;
+      render(audio.currentTime + LEAD);
+      updateTime();
+    }
+  }
+
+  track.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    track.setPointerCapture(e.pointerId);
+    seekTo(e.clientX);
+  });
+
+  track.addEventListener('pointermove', function (e) {
+    if (dragging) seekTo(e.clientX);
+  });
+
+  track.addEventListener('pointerup', function (e) {
+    dragging = false;
+    try { track.releasePointerCapture(e.pointerId); } catch (err) {}
+  });
+
+  track.addEventListener('keydown', function (e) {
+    if (!Number.isFinite(audio.duration)) return;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      var step = e.key === 'ArrowLeft' ? 5 : -5;
+      audio.currentTime = Math.min(Math.max(audio.currentTime + step, 0), audio.duration);
+    }
+  });
+
+  function begin() {
+    gate.classList.add('is-hidden');
+    player.classList.add('is-visible');
+    buildTimeline(DURATION);
+    render(LEAD);
+    updateTime();
+    play();
+  }
+
+  startBt.addEventListener('click', begin);
+  gate.addEventListener('click', function (e) {
+    if (e.target !== startBt) begin();
+  });
+
+  buildTimeline(DURATION);
+  updateTime();
+})();
+</script>
+</body>
+</html>
