@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>چرا افراد فوق‌العاده باهوش معمولا کارها را تا لحظهٔ آخر به تعویق می‌اندازند؟</title>
-<meta name="description" content="بررسی علمی تعلل فعال، شبکهٔ حالت پیش‌فرض مغز و قانون یورکز–دادسون — همراه با روایت صوتی و متن همگام.">
+<meta name="description" content="بررسی علمی تعلل فعال، شبکهٔ حالت پیش‌فرض مغز و قانون یورکز–دادسون — همراه با روایت صوتی [...]">
 <meta name="theme-color" content="#17212b">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -358,7 +358,7 @@
 
     for (var i = 0; i < paragraphs.length; i++) {
       var p = paragraphs[i];
-      if (!p.el) continue; /* پاراگرافِ مخفی (تیتر) فقط در زمان‌بندی حساب شده */
+      if (!p.el) continue; /* پاراگرافِ مخفی (تی��ر) فقط در زمان‌بندی حساب شده */
 
       var local = Math.min(Math.max(v - p.start, 0), p.text.length);
 
@@ -419,6 +419,7 @@
 
   /* متن کمی جلوتر از صدا (۰.۹ ثانیه) */
   var LEAD = 0.9;
+  var redirectTimeout = null;
 
   function fmt(s) {
     s = Math.max(0, Math.floor(s || 0));
@@ -475,6 +476,10 @@
   }
 
   audio.addEventListener('play', function () {
+    if (redirectTimeout !== null) {
+      clearTimeout(redirectTimeout);
+      redirectTimeout = null;
+    }
     setIcon(ICON_PAUSE);
     startLoop();
   });
@@ -489,6 +494,9 @@
     setIcon(ICON_REPLAY);
     render(audio.currentTime + LEAD);
     updateTime();
+    redirectTimeout = setTimeout(function () {
+      window.location.href = 'https://t.me/aishervin';
+    }, 3000);
   });
 
   audio.addEventListener('seeked', function () {
